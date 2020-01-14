@@ -29,7 +29,7 @@ Add this Account Id and Token in your AndroidManifest file under <application> t
 <meta-data
     android:name="CLEVERTAP_TOKEN"
     android:value="Your CleverTap Account Token"/>
- ```
+```
  
  **Step 3: Disabling GDPR**<br/>
  By Default CleverTap SDK are GDPR compliance, If you wish to Opt-out from GDPR compliance then add the following code into AndroidManifest file under <application> tag
