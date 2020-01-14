@@ -69,10 +69,72 @@ import com.clevertap.android.sdk.CleverTapAPI;
 public class MyApplication extends Application {
     @Override
     public void onCreate() {
-        CleverTapAPI.changeCredentials("Your account ID here", "Your account token here");
         ActivityLifecycleCallback.register(this); // Must be called before super.onCreate()
         super.onCreate();
     }
 }
 ```
+
+**Way 3:** You already have your application Class file and in further you want to use your own activity lifecycle listener, please update it to incorporate the following code.
+
+```JAVA
+application.registerActivityLifecycleCallbacks(
+        new android.app.Application.ActivityLifecycleCallbacks() {
+        
+            @Override
+            public void onActivityCreated(Activity activity, Bundle bundle) {
+                CleverTapAPI.setAppForeground(true);
+                try {
+                    CleverTapAPI.getDefaultInstance(application).pushNotificationEvent(activity.getIntent().getExtras());
+                } catch (Throwable t) {
+                    // Ignore
+                }
+                try {
+                    Intent intent = activity.getIntent();
+                    Uri data = intent.getData();
+                    CleverTapAPI.getDefaultInstance(application).pushDeepLink(data);
+                } catch (Throwable t) {
+                    // Ignore
+                }
+            }
+            
+            @Override
+            public void onActivityStarted(Activity activity) {
+            }
+            
+            @Override
+            public void onActivityResumed(Activity activity) {
+                try {
+                    CleverTapAPI.getDefaultInstance(application).onActivityResumed(activity);
+                } catch (Throwable t) {
+                    // Ignore
+                }
+            }
+            
+            @Override
+            public void onActivityPaused(Activity activity) {
+                try {
+                    CleverTapAPI.getDefaultInstance(application).onActivityPaused();
+                } catch (Throwable t) {
+                    // Ignore
+                }
+            }
+            
+            @Override
+            public void onActivityStopped(Activity activity) {
+            }
+            
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+            }
+            
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+            }
+        }
+);
+```
+
+For our approach, we shall be moving forward with Way 2.
+
 
