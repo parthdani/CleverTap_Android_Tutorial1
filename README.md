@@ -137,4 +137,27 @@ application.registerActivityLifecycleCallbacks(
 
 For our approach, we shall be moving forward with Way 2.
 
+**Step 6: Initializing CleverTap Instance**
+To call any methods of CleverTap SDK, you need to create an instance which you can do it as follow:
+```JAVA
+CleverTapAPI clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
+```
+
+Over here **clevertapDefaultInstance** is an instance object which can be used througout the application, if you make it public and declare in your Application class file.
+
+**Step 7: Install Referral Broadcast receiver**
+CleverTap tracks organic install, for this you need to add receiver in Android Manifest file which will be called whenever Google play serives brodcast install referrer. Add the following receiver in your Android Manifest file.
+```JAVA
+<receiver
+    android:name="com.clevertap.android.sdk.InstallReferrerBroadcastReceiver"
+    android:exported="true">
+        <intent-filter>
+            <action android:name="com.android.vending.INSTALL_REFERRER"/>
+        </intent-filter>
+</receiver>
+```
+From **CleverTap SDK 3.6.3** and onwards, since Google have deprecated install receiver, so to incorporate the same, please remove the above install receiver if it is there in your Android Manifest and then add the following dependency in your Gradle file.This will help you to capture UTM details, app-install time, referrer click time and other metrics provided by the Google Install Referrer Library.
+```JAVA
+implementation 'com.android.installreferrer:installreferrer:1.1'
+```
 
