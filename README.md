@@ -29,6 +29,4 @@ Add this Account Id and Token in your AndroidManifest file. For refrence, please
 <meta-data
     android:name="CLEVERTAP_TOKEN"
     android:value="Your CleverTap Account Token"/>
-    ```
-    
-    
+ ```
