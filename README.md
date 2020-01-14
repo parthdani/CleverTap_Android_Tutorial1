@@ -1,7 +1,7 @@
 # CleverTap_Android_Tutorial_1
 I shall be creating a multiple series of an example where I will help you to integrate with CleverTap SDK into your project. This project is the first example of that series. I will not take you through the flow of creating a new project in Android studio since the pre-requisite of this tutorial is that you already have your own project where you want to integrate CleverTap directly. Now please find the steps for integrating CleverTap with your project as follow
 
-**Step 1: Adding the Dependency**
+**Step 1: Adding the Dependency**<br/>
 Add the following dependencies into your Gradle file. This will help you to get CleverTap SDK and Firebase Messaging SDK imported into your project.
 
 ```JAVA
@@ -16,9 +16,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 implementation 'com.clevertap.android:clevertap-android-sdk:+' : This will always import the latest version of CleverTap SDK into your project. Rest of the implementation are use for Push notification. If you already are using Firebase as a push notification then firebase-messaging, play-service-base and support-v4 are already there. so no need to add them again.
 
-**Step 2: Adding CleverTap Details**
+**Step 2: Adding CleverTap Details**<br/>
 Every CleverTap Application is provided with Account ID and Token. You can find them under Settings > Accounts. For refrence, please find the screenshot as follow
-![Screenshot](https://github.com/parthdani/CleverTap_Android_Tutorial1/blob/master/Screenshot%202020-01-14%20at%202.02.47%20PM.png)
+![Screenshot](https://github.com/parthdani/CleverTap_Android_Tutorial_1/blob/master/Screenshot%202020-01-14%20at%202.02.47%20PM.png)
 
 Add this Account Id and Token in your AndroidManifest file under <application> tag. For refrence, please find the source code as follow
 
@@ -31,7 +31,7 @@ Add this Account Id and Token in your AndroidManifest file under <application> t
     android:value="Your CleverTap Account Token"/>
  ```
  
- **Step 3: Disabling GDPR**
+ **Step 3: Disabling GDPR**<br/>
  By Default CleverTap SDK are GDPR compliance, If you wish to Opt-out from GDPR complainces then add the following code into AndroidManifest file under <application> tag
 
 ```JAVA
@@ -42,7 +42,7 @@ Add this Account Id and Token in your AndroidManifest file under <application> t
 
 To read more on GDPR compliance, Please visit [here](https://clevertap.com/blog/in-preparation-of-gdpr-compliance/)
 
-**Step 4: Add Required Permission**
+**Step 4: Add Required Permission**<br/>
 For passing information such as events and user details to CleverTap, your applciation will require internet and for that you will need to take permission for Internet. For refrence, Add the following code in your Android Manifest.
 ```JAVA
 <!-- Required to allow the app to send events and user profile information -->
@@ -137,7 +137,7 @@ application.registerActivityLifecycleCallbacks(
 
 For our approach, we shall be moving forward with Way 2.
 
-**Step 6: Initializing CleverTap Instance**
+**Step 6: Initializing CleverTap Instance**<br/>
 To call any methods of CleverTap SDK, you need to create an instance which you can do it as follow:
 ```JAVA
 CleverTapAPI clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
@@ -145,7 +145,7 @@ CleverTapAPI clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getAppli
 
 Over here **clevertapDefaultInstance** is an instance object which can be used througout the application, if you make it public and declare in your Application class file.
 
-**Step 7: Install Referral Broadcast receiver**
+**Step 7: Install Referral Broadcast receiver**<br/>
 CleverTap tracks organic install, for this you need to add receiver in Android Manifest file which will be called whenever Google play serives brodcast install referrer. Add the following receiver in your Android Manifest file.
 ```JAVA
 <receiver
@@ -160,4 +160,17 @@ From **CleverTap SDK 3.6.3** and onwards, since Google have deprecated install r
 ```JAVA
 implementation 'com.android.installreferrer:installreferrer:1.1'
 ```
+
+**Step 8: Allowing CleverTap SDK to capture user IP address**<br/>
+
+As we mentioned in step no 3, CleverTap SDK is a GDPR compliant and they by default don't capture IP address of the user. If you allow them to track the IP address of the user then CleverTap SDK will capture the IP address and send it with App Launched event(system event of CleverTap). Using this IP address, CleverTap do the reverse IP using the third party tool "MaxMind" and store the same for every user profile. It will look like as follow on the user profile in CleverTap Dashboard.
+![Screenshot](https://github.com/parthdani/CleverTap_Android_Tutorial_1/blob/master/Screenshot%202020-01-14%20at%206.36.47%20PM.png)
+
+Add the following code in your application class file before you initialize the instance.
+
+```JAVA
+cleverTap.enableDeviceNetworkInfoReporting(true);
+```
+
+This will also allow CleverTap SDK to capture other information like WiFi, Bluetooth and Network Information.
 
