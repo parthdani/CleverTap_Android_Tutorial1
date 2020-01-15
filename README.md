@@ -18,7 +18,7 @@ implementation 'com.clevertap.android:clevertap-android-sdk:+' : This will alway
 
 **Step 2: Adding CleverTap Details**<br/>
 Every CleverTap Application is provided with the Account ID and Token. You can find them under Settings > Accounts. For reference, please find the screenshot as follow
-![Screenshot](https://github.com/parthdani/CleverTap_Android_Tutorial_1/blob/master/Screenshot%202020-01-14%20at%202.02.47%20PM.png)
+![Screenshot](https://parthdani.github.io/CleverTap_Android_Tutorial_1/Screenshot%202020-01-14%20at%202.02.47%20PM.png)
 
 Add this Account Id and Token in your AndroidManifest file under <application> tag. For reference, please find the source code as follow
 
@@ -164,7 +164,7 @@ implementation 'com.android.installreferrer:installreferrer:1.1'
 **Step 8: Allowing CleverTap SDK to capture user IP address**<br/>
 
 As we mentioned in step no 3, CleverTap SDK is a GDPR compliant and they by default don't capture IP address of the user. If you allow them to track the IP address of the user then CleverTap SDK will capture the IP address and send it with App Launched event(system event of CleverTap). Using this IP address, CleverTap do the reverse IP using the third party tool "MaxMind" and store the same for every user profile. It will look like as follow on the user profile in CleverTap Dashboard.
-![Screenshot](https://github.com/parthdani/CleverTap_Android_Tutorial_1/blob/master/Screenshot%202020-01-14%20at%206.36.47%20PM.png)
+![Screenshot](https://parthdani.github.io/CleverTap_Android_Tutorial_1/Screenshot%202020-01-14%20at%206.36.47%20PM.png)
 
 Add the following code in your application class file before you initialize the instance.
 
