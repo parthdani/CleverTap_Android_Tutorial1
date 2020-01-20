@@ -14,7 +14,7 @@ dependencies {
 // at the end of the build.gradle file
 apply plugin: 'com.google.gms.google-services'
 ```
-implementation 'com.clevertap.android:clevertap-android-sdk:+' : This will always import the latest version of CleverTap SDK into your project. Rest of the implementation are use for Push notification. If you already are using Firebase as a push notification then firebase-messaging, play-service-base and support-v4 are already there. so no need to add them again.
+implementation 'com.clevertap.android:clevertap-android-sdk:+' : This will always import the latest version of CleverTap SDK into your project. Rest of the implementation is used for Push notifications. If you already are using Firebase as a push notification then firebase-messaging, play-service-base and support-v4 will already be there so no need to add them again.
 
 **Step 2: Adding CleverTap Details**<br/>
 Every CleverTap Application is provided with the Account ID and Token. You can find them under Settings > Accounts. For reference, please find the screenshot as follow
@@ -32,7 +32,7 @@ Add this Account Id and Token in your AndroidManifest file under <application> t
 ```
  
  **Step 3: Disabling GDPR**<br/>
- By Default CleverTap SDK are GDPR compliance, If you wish to Opt-out from GDPR compliance then add the following code into AndroidManifest file under <application> tag
+ By default CleverTap SDK is GDPR compliant, if you wish to opt-out from GDPR compliance then add the following code into AndroidManifest file under <application> tag
 
 ```JAVA
 <meta-data
@@ -51,7 +51,7 @@ For passing information such as events and user details to CleverTap, your appli
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 **Step 5: Enable Activity Life Cycle Callbacks**
-For every Android Application has a lifecycle and lifecycle callbacks. Now to tracking events and attributes, SDK relies on this lifecycle callbacks. This also helps SDK to determine the best time to send back to CleverTap Servers without affecting apps performance. Now for CleverTap, you can do this in three ways.
+Every Android Application has a lifecycle and lifecycle callbacks. Now to track events and attributes, SDK relies on these lifecycle callbacks. This also helps SDK to determine the best time to send back to CleverTap Servers without affecting the app's performance. Now for CleverTap, you can do this in three ways.
 
 **Way 1:** If you don't have your application class file then define **com.clevertap.android.sdk.Application** in your application tag in Android Manifest. For reference, you can do this as follow
 ```JAVA
@@ -60,7 +60,7 @@ For every Android Application has a lifecycle and lifecycle callbacks. Now to tr
     android:icon="@drawable/ic_launcher"
     android:name="com.clevertap.android.sdk.Application">
 ```
-**Way 2:** If you already have the application class file define in your Android Manifest file then call **ActivityLifecycleCallback.register(this);** before **super.onCreate()** in your class. For refrence, it will look like as follow
+**Way 2:** If you already have the application class file defined in your Android Manifest file then call **ActivityLifecycleCallback.register(this);** before **super.onCreate()** in your class. For reference, it will look like as follow
 ```JAVA
 import android.app.Application;
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
